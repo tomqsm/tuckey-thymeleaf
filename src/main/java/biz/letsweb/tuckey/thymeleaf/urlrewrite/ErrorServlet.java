@@ -35,7 +35,7 @@ public class ErrorServlet extends HttpServlet {
      @throws ServletException
      @throws IOException
      */
-    public void prepare(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void tuckeyFilterBefore(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        final String errorRequestURI = (String) req.getAttribute(RequestDispatcher.ERROR_REQUEST_URI);
         final Object errorCode = req.getAttribute("javax.servlet.error.status_code");
         final Object errorType = req.getAttribute("javax.servlet.error.exception_type");

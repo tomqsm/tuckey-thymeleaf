@@ -15,18 +15,13 @@
     
     <rule>
         <from>^/error$</from>
-        <run class="biz.letsweb.tuckey.thymeleaf.urlrewrite.ErrorServlet" method="prepare"></run>
+        <run class="biz.letsweb.tuckey.thymeleaf.urlrewrite.ErrorServlet" method="tuckeyFilterBefore"></run>
         <to last="true">/error-servlet</to>
     </rule>
 
-    <!--    <rule>
-        <from>^/error-servlet$</from>
-        <to last="true">404</to>
-    </rule>-->
-
     <rule>
         <from>^(/|/index)$</from>
-        <run class="biz.letsweb.tuckey.thymeleaf.urlrewrite.IndexServlet" method="prepare">
+        <run class="biz.letsweb.tuckey.thymeleaf.urlrewrite.IndexServlet" method="tuckeyFilterBefore">
             <init-param>
                 <param-name>someParamName</param-name>
                 <param-value>10</param-value>

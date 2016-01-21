@@ -36,7 +36,7 @@ public class IndexServlet extends HttpServlet {
      @throws ServletException
      @throws IOException
      */
-    public void prepare(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void tuckeyFilterBefore(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("someParamName", getServletConfig().getInitParameter("someParamName"));
         req.setAttribute("test", "works ok");
     }
