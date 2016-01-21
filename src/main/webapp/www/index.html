@@ -1,0 +1,18 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <title>Error</title>
+        <meta name="description" content=""/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/main.css" th:href="@{/css/main.css}" />
+    </head>
+    <body>
+        <h1>Index well hmms</h1>
+        <p th:with="titleParsed=${'dynamic stuff'}" th:utext="${titleParsed}">static stuff</p>
+        <p th:text="${'init parameter: ' + someParamName}">someParamName</p>
+        <p th:text="${'paramater passed from a method: ' + test}">test</p>
+        <p th:text="#{index.hello}">i18-off</p>
+    </body>
+</html>
