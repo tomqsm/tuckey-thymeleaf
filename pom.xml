@@ -26,12 +26,6 @@
             <version>2.1.4.RELEASE</version>
             <type>jar</type>
         </dependency>
-        <dependency>
-            <groupId>org.thymeleaf</groupId>
-            <artifactId>thymeleaf-spring4</artifactId>
-            <version>2.1.4.RELEASE</version>
-            <type>jar</type>
-        </dependency>
         <!-- L O G G I N G -->
         <dependency>
             <groupId>org.slf4j</groupId>
