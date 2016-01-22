@@ -13,6 +13,13 @@
         <p th:with="titleParsed=${'dynamic stuff'}" th:utext="${titleParsed}">static stuff</p>
         <p th:text="${'init parameter: ' + someParamName}">someParamName</p>
         <p th:text="${'paramater passed from a method: ' + test}">test</p>
-        <p th:text="#{index.hello}">i18-off</p>
+        <p th:text="#{index.hello('Tomasz')}">i18-off</p>
+        <p th:text="${#dates.createNow()}">i18-off</p>
+        <a th:href="@{/static/info}">view</a>
+        <ul>
+            <li th:each="i, iterStat : ${#strings.listSplit(#ctx.applicationAttributes['org.apache.catalina.jsp_classpath'],';')}">
+                <p th:text="${iterStat.index+1 + ') ' +i}">i18-off</p>
+            </li>
+        </ul>
     </body>
 </html>

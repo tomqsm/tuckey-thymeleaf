@@ -30,4 +30,10 @@
         <to last="true">/index-servlet</to>
     </rule>
 
+    <outbound-rule enabled="true" match-type="regex">
+        <name></name>
+        <from>^(/.*)/static/info$</from>
+        <to last="true">$1/www/info_1.html</to>
+    </outbound-rule>
+
 </urlrewrite>
