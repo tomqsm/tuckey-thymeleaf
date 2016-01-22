@@ -1,4 +1,4 @@
-package biz.letsweb.tuckey.thymeleaf.urlrewrite;
+package biz.letsweb.tuckey.thymeleaf.servlets;
 
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;

@@ -1,6 +1,6 @@
-package biz.letsweb.tuckey.thymeleaf.urlrewrite;
+package biz.letsweb.tuckey.thymeleaf.servlets;
 
-import static biz.letsweb.tuckey.thymeleaf.urlrewrite.ErrorServlet.VIEW_NAME;
+import static biz.letsweb.tuckey.thymeleaf.servlets.ErrorServlet.VIEW_NAME;
 import java.io.IOException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
