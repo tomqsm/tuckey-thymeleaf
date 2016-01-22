@@ -36,4 +36,12 @@
         <to last="true">$1/www/info_1.html</to>
     </outbound-rule>
 
+    <rule enabled="true" match-type="regex">
+        <name>getJson</name>
+        <condition type="method">GET</condition>
+        <from>^/test.json$</from>
+        <run class="biz.letsweb.tuckey.thymeleaf.json.TestJson" method="getJson"/>
+        <to type="forward">/test.json.ftl</to>
+    </rule>
+
 </urlrewrite>

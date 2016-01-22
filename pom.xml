@@ -19,6 +19,12 @@
             <artifactId>urlrewritefilter</artifactId>
             <version>4.0.4</version>
         </dependency>
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.23</version>
+            <type>jar</type>
+        </dependency>
         <!--HTML TEMPLATE-->
         <dependency>
             <groupId>org.thymeleaf</groupId>

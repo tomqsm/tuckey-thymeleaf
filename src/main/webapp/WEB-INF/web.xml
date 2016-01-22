@@ -43,10 +43,58 @@
         <!--<dispatcher>FORWARD</dispatcher>-->
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
+    <servlet>
+        <description>Json templating.</description>
+        <servlet-name>freemarkerForJson</servlet-name>
+        <servlet-class>freemarker.ext.servlet.FreemarkerServlet</servlet-class>
+        <async-supported>true</async-supported>
+        <!-- FreemarkerServlet settings: -->
+        <init-param>
+            <param-name>TemplatePath</param-name>
+            <param-value>json</param-value>
+        </init-param>
+        <init-param>
+            <!--If set to true, generates headers in the response that advise the HTTP client not to cache the returned page. The default is false.-->
+            <param-name>NoCache</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <param-name>ContentType</param-name>
+            <param-value>application/json; charset=UTF-8</param-value>
+            <!-- Forces UTF-8 output encoding! -->
+        </init-param>
+        <init-param>
+            <param-name>template_exception_handler</param-name>
+            <!-- Some may prefer "html_debug" for development. -->
+            <!--<param-value>rethrow</param-value>-->
+            <param-value>html_debug</param-value>
+        </init-param>
+        <init-param>
+            <param-name>template_update_delay</param-name>
+            <param-value>10</param-value>
+            <!-- 0 is for development only! Use higher value otherwise. -->
+        </init-param>
+        <init-param>
+            <param-name>default_encoding</param-name>
+            <param-value>UTF-8</param-value>
+            <!-- The encoding of the template files. -->
+        </init-param>
+        <init-param>
+            <param-name>number_format</param-name>
+            <param-value>0.##########</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>freemarkerForJson</servlet-name>
+        <url-pattern>*.ftl</url-pattern>
+    </servlet-mapping>
+
     <listener>
         <description>ServletContextListener</description>
         <listener-class>biz.letsweb.tuckey.thymeleaf.lifecycle.WebbAppListener</listener-class>
     </listener>
+
     <!--    <resource-ref>
         <description>JNDI data source resource.</description>
         <res-ref-name>${filter.jndiDsName}</res-ref-name>
