@@ -1,5 +1,6 @@
 package biz.letsweb.tuckey.thymeleaf.servlets;
 
+import biz.letsweb.tuckey.thymeleaf.aspects.Timed;
 import static biz.letsweb.tuckey.thymeleaf.servlets.IndexServlet.VIEW_NAME;
 import java.io.IOException;
 import javax.servlet.ServletContext;
@@ -21,6 +22,7 @@ public class IndexServlet extends HttpServlet {
     public static final String VIEW_NAME = "index";
 
     @Override
+    @Timed(message = "loads template and redirects to view")
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         final TemplateEngine templateEngine = ThymeleafConfig.getConfiguredTemplateEngine();
         final ServletContext servletContext = getServletConfig().getServletContext();
@@ -36,6 +38,7 @@ public class IndexServlet extends HttpServlet {
      @throws ServletException
      @throws IOException
      */
+    @Timed(message = "tucky method")
     public void tuckeyFilterBefore(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("someParamName", getServletConfig().getInitParameter("someParamName"));
         req.setAttribute("test", "works ok");

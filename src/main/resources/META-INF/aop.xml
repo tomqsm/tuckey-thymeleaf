@@ -1,0 +1,12 @@
+<!DOCTYPE aspectj PUBLIC "-//AspectJ//DTD//EN" "http://www.eclipse.org/aspectj/dtd/aspectj.dtd">
+<aspectj>
+    <weaver options="-showWeaveInfo -verbose">
+        <!-- only weave classes in our application-specific packages -->
+        <include within="biz.letsweb.tuckey.thymeleaf.servlets.*" />
+        <include within="biz.letsweb.tuckey.thymeleaf.aspects.*" />
+    </weaver>
+    <aspects>
+        <!-- weave in just this aspect -->
+        <aspect name="biz.letsweb.tuckey.thymeleaf.aspects.TimedAspect" />
+    </aspects>
+</aspectj>
