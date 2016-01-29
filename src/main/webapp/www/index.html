@@ -3,12 +3,13 @@
     <head>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <title>Error</title>
+        <title>Index</title>
         <meta name="description" content=""/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
         <link rel="stylesheet" type="text/css" media="all" href="../css/main.css" th:href="@{/css/main.css}" />
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
     </head>
-    <body>
+    <body ng-app="tt">
         <h1>Index well hmms</h1>
         <p th:with="titleParsed=${'dynamic stuff'}" th:utext="${titleParsed}">static stuff</p>
         <p th:text="${'init parameter: ' + someParamName}">someParamName</p>
@@ -16,10 +17,29 @@
         <p th:text="#{index.hello('Tomasz')}">i18-off</p>
         <p th:text="${#dates.createNow()}">i18-off</p>
         <a th:href="@{/static/info}">view</a>
+        <div ng-controller="sum as sum">
+            <p>{{sum.outcome}}</p>
+        </div>
+        <div ng-controller="memory as mem">
+            <p>{{mem.mem.value.HeapMemoryUsage}}</p>
+        </div>
         <ul>
             <li th:each="i, iterStat : ${#strings.listSplit(#ctx.applicationAttributes['org.apache.catalina.jsp_classpath'],';')}">
                 <p th:text="${iterStat.index+1 + ') ' +i}">i18-off</p>
             </li>
         </ul>
+        <script th:inline="javascript">
+                    var app = angular.module("tt", []);
+                    app.controller("sum", function ($scope){
+                    var vm = this;
+                            vm.outcome = 2 + 3;
+                    });
+                    app.controller("memory", function ($scope, $http){
+                    var vm = this, url = "[[${#httpServletRequest.getServerName()+':'+#httpServletRequest.getServerPort()} + '/jolokia/read/java.lang:type=Memory']]";
+                            $http.get(url).then(function(response) {
+                    vm.mem = response.data;
+                    });
+                    });
+        </script>
     </body>
 </html>
