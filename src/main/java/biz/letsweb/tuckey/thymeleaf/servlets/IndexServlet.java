@@ -24,11 +24,7 @@ public class IndexServlet extends HttpServlet {
     @Override
     @Timed(message = "loads template and redirects to view")
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        final TemplateEngine templateEngine = ThymeleafConfig.getConfiguredTemplateEngine();
-        final ServletContext servletContext = getServletConfig().getServletContext();
-        final WebContext ctx = new WebContext(req, resp, servletContext, req.getLocale());
-        templateEngine.process(VIEW_NAME, ctx, resp.getWriter());
-
+        processTemplateAndPassToView(req, resp);
     }
 
     /**
@@ -39,8 +35,15 @@ public class IndexServlet extends HttpServlet {
      @throws IOException
      */
     @Timed(message = "tucky method")
-    public void tuckeyFilterBefore(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void tuckeyFilterBeforeGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("someParamName", getServletConfig().getInitParameter("someParamName"));
         req.setAttribute("test", "works ok");
+    }
+
+    private void processTemplateAndPassToView(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        final TemplateEngine templateEngine = ThymeleafConfig.getConfiguredTemplateEngine();
+        final ServletContext servletContext = getServletConfig().getServletContext();
+        final WebContext ctx = new WebContext(req, resp, servletContext, req.getLocale());
+        templateEngine.process(VIEW_NAME, ctx, resp.getWriter());
     }
 }

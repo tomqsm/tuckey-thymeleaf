@@ -21,7 +21,7 @@ import javax.servlet.ServletContextListener;
  * @author toks
  */
 public class WebbAppListener implements ServletContextListener {
-    
+
     private ObjectName objectName;
 
     @Override
@@ -30,8 +30,10 @@ public class WebbAppListener implements ServletContextListener {
         final MBeanServer server = ManagementFactory.getPlatformMBeanServer();
         try {
             objectName = new ObjectName("tuckey-thymeleaf:type=Counter");
-            CounterMBean mbean = new Counter();
-            server.registerMBean(mbean, objectName);
+            if (!server.isRegistered(objectName)) {
+                CounterMBean mbean = new Counter();
+                server.registerMBean(mbean, objectName);
+            }
         } catch (MalformedObjectNameException ex) {
             Logger.getLogger(WebbAppListener.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstanceAlreadyExistsException ex) {
@@ -48,7 +50,9 @@ public class WebbAppListener implements ServletContextListener {
         final MBeanServer server = ManagementFactory.getPlatformMBeanServer();
         try {
             objectName = new ObjectName("tuckey-thymeleaf:type=Counter");
-            server.unregisterMBean(objectName);
+            if (server.isRegistered(objectName)) {
+                server.unregisterMBean(objectName);
+            }
         } catch (MalformedObjectNameException ex) {
             Logger.getLogger(WebbAppListener.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstanceNotFoundException ex) {

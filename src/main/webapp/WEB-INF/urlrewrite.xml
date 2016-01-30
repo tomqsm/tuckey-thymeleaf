@@ -21,7 +21,8 @@
 
     <rule>
         <from>^(/|/index)$</from>
-        <run class="biz.letsweb.tuckey.thymeleaf.servlets.IndexServlet" method="tuckeyFilterBefore">
+        <condition type="method">GET</condition>
+        <run class="biz.letsweb.tuckey.thymeleaf.servlets.IndexServlet" method="tuckeyFilterBeforeGet">
             <init-param>
                 <param-name>someParamName</param-name>
                 <param-value>10</param-value>
@@ -40,7 +41,7 @@
         <name>getJson</name>
         <condition type="method">GET</condition>
         <from>^/test.json$</from>
-        <run class="biz.letsweb.tuckey.thymeleaf.json.TestJson" method="getJson"/>
+        <run class="biz.letsweb.tuckey.thymeleaf.json.TestJson" method="setJsonAttributes"/>
         <to type="forward">/test.json.ftl</to>
     </rule>
 
