@@ -21,23 +21,24 @@
             <p>{{sum.outcome}}</p>
         </div>
         <div ng-controller="memory as mem">
-            <p>{{mem.mem.value.HeapMemoryUsage}}</p>
+            <p>free memory MB: {{mem.heapMemory.max / 1048576 | number:2}} - {{mem.heapMemory.used / 1048576 | number:2}} = {{mem.freeMemoryMB | number:2}}</p>
         </div>
         <ul>
             <li th:each="i, iterStat : ${#strings.listSplit(#ctx.applicationAttributes['org.apache.catalina.jsp_classpath'],';')}">
                 <p th:text="${iterStat.index+1 + ') ' +i}">i18-off</p>
             </li>
         </ul>
-        <script th:inline="javascript">
+        <script th:inline="text">
                     var app = angular.module("tt", []);
                     app.controller("sum", function ($scope){
                     var vm = this;
                             vm.outcome = 2 + 3;
                     });
                     app.controller("memory", function ($scope, $http){
-                    var vm = this, url = "[[${#httpServletRequest.getServerName()+':'+#httpServletRequest.getServerPort()} + '/jolokia/read/java.lang:type=Memory']]";
+                    var vm = this, url = "http://[[${#httpServletRequest.getServerName()+':'+#httpServletRequest.getServerPort()} + '/jolokia/read/java.lang:type=Memory']]";
                             $http.get(url).then(function(response) {
-                    vm.mem = response.data;
+                    vm.heapMemory = response.data.value.HeapMemoryUsage;
+                    vm.freeMemoryMB = (vm.heapMemory.max - vm.heapMemory.used) / 1048576;
                     });
                     });
         </script>
