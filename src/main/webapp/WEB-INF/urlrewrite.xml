@@ -34,7 +34,7 @@
     <outbound-rule enabled="true" match-type="regex">
         <name></name>
         <from>^(/.*)/static/info$</from>
-        <to last="true">$1/www/info_1.html</to>
+        <to last="true">$1/html/info_1.html</to>
     </outbound-rule>
 
     <rule enabled="true" match-type="regex">

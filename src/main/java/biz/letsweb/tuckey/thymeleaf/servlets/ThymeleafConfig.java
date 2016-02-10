@@ -13,7 +13,7 @@ public class ThymeleafConfig {
         ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver();
         // XHTML is the default mode, but we will set it anyway for better understanding of code
         templateResolver.setTemplateMode("XHTML");
-        templateResolver.setPrefix("/www/");
+        templateResolver.setPrefix("/html/");
 //        templateResolver.setPrefix("/WEB-INF/classes/templates/");
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode("HTML5");
