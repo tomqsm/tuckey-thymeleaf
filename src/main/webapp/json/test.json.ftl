@@ -1,1 +1,0 @@
-<#ftl><#assign locale="en"><#setting locale=locale><#include "test.json" parse=true encoding="UTF-8">

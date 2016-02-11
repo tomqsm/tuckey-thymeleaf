@@ -1,0 +1,8 @@
+{
+    "user": "tomasz",
+    "decimal-localised": "${1.2}",
+    "test": "coś",
+    "currentTime": "${currentTime}",
+    "locale": "${request.locale}",
+    "items": "[<#list items as item>${item}<#sep>,</#list>]"
+}

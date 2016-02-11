@@ -35,7 +35,7 @@ public class TimedAspect {
         Split split = Split.start();
         final Object result = proceedingJoinPoint.proceed();
         final Signature signature = proceedingJoinPoint.getSignature();
-        System.out.println(String.format("%s [%s] %s", signature.getName(), split, timed.message()));
+        System.out.println(String.format("%s#%s [%s] %s", signature.getDeclaringType().getSimpleName(), signature.getName(), split, timed.message()));
         return result;
     }
 

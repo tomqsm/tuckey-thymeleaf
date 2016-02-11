@@ -10,8 +10,10 @@
     </head>
     <body>
         <h1 th:text="#{error.title}">Ups, something went wrong.</h1>
-        <p th:utext="${errorCode}">123</p>
-        <p th:utext="${errorType}">no error message</p>
-        <p th:utext="${errorMessage}">no error message</p>
+        <p th:utext="${errorRequestURI}">error request uri placeholder</p>
+        <p th:utext="${errorCode}">error code placeholder</p>
+        <p th:utext="${errorType}">error type placeholder</p>
+        <p th:utext="${errorMessage}">error message placeholder</p>
+        <p th:utext="${isViewMissing ? 'Template error, you should set view in urlrewrite.xml' : ''}">no error message</p>
     </body>
 </html>

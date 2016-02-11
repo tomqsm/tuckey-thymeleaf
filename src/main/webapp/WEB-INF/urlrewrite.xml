@@ -9,25 +9,27 @@
         <to encode="false">/resources/details.seam?owner=${escape:${unescapePath:$1}}&name=${escape:${unescapePath:$2}}</to>
     </rule>-->
     <rule>
-        <from>^/index-servlet$</from>
+        <from>^(/index-servlet)$</from>
         <to last="true">/404</to>
     </rule>
     
     <rule>
         <from>^/error$</from>
-        <run class="biz.letsweb.tuckey.thymeleaf.servlets.ErrorServlet" method="tuckeyFilterBefore"></run>
+        <set name="view">error</set>
         <to last="true">/error-servlet</to>
     </rule>
 
     <rule>
+        <note>Has no 'to' destination. Next filter starts.</note>
         <from>^(/|/index)$</from>
         <condition type="method">GET</condition>
-        <run class="biz.letsweb.tuckey.thymeleaf.servlets.IndexServlet" method="tuckeyFilterBeforeGet">
+        <run class="biz.letsweb.tuckey.thymeleaf.servlets.IndexServlet" method="setTuckeyParams">
             <init-param>
-                <param-name>someParamName</param-name>
+                <param-name>initParameter</param-name>
                 <param-value>10</param-value>
             </init-param>
         </run>
+        <set name="view">index</set>
         <to last="true">/index-servlet</to>
     </rule>
 
