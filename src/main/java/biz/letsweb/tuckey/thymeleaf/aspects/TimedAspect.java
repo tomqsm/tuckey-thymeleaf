@@ -30,8 +30,8 @@ public class TimedAspect {
 
     @Around("timedMethods()")
     public Object around(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
-        final Method m = extractMethod(proceedingJoinPoint);
-        final Timed timed = (Timed) m.getDeclaredAnnotations()[0];
+        final Method method = extractMethod(proceedingJoinPoint);
+        final Timed timed = (Timed) method.getDeclaredAnnotations()[0];
         Split split = Split.start();
         final Object proceeded = proceedingJoinPoint.proceed();
         final Signature signature = proceedingJoinPoint.getSignature();
