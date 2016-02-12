@@ -33,10 +33,10 @@ public class TimedAspect {
         final Method m = extractMethod(proceedingJoinPoint);
         final Timed timed = (Timed) m.getDeclaredAnnotations()[0];
         Split split = Split.start();
-        final Object result = proceedingJoinPoint.proceed();
+        final Object proceeded = proceedingJoinPoint.proceed();
         final Signature signature = proceedingJoinPoint.getSignature();
         System.out.println(String.format("%s#%s [%s] %s", signature.getDeclaringType().getSimpleName(), signature.getName(), split, timed.message()));
-        return result;
+        return proceeded;
     }
 
     @After("timedMethods()")
