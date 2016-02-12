@@ -9,18 +9,23 @@
         <to encode="false">/resources/details.seam?owner=${escape:${unescapePath:$1}}&name=${escape:${unescapePath:$2}}</to>
     </rule>-->
     <rule>
+        <name>Stop direct access to servlets except for the error servlet.</name>
+        <note>Servlets can be only frwarded to from this filter. Then aren't to be access per request.</note>
         <from>^(/index-servlet)$</from>
         <to last="true">/404</to>
     </rule>
     
     <rule>
+        <name>Display error page.</name>
+        <note>Responds to the container's on /error and customises the view of an error for user.</note>
         <from>^/error$</from>
         <set name="view">error</set>
         <to last="true">/error-servlet</to>
     </rule>
 
     <rule>
-        <note>Has no 'to' destination. Next filter starts.</note>
+        <name>Display landing page.</name>
+        <note>Forwards to a servlet and uses this filter 'before' calback method for setting init params.</note>
         <from>^(/|/index)$</from>
         <condition type="method">GET</condition>
         <run class="biz.letsweb.tuckey.thymeleaf.servlets.IndexServlet" method="setTuckeyParams">
@@ -34,7 +39,7 @@
     </rule>
 
     <outbound-rule enabled="true" match-type="regex">
-        <name></name>
+        <name>Rewrite existing url.</name>
         <from>^(/.*)/static/info$</from>
         <to last="true">$1/html/info_1.html</to>
     </outbound-rule>
