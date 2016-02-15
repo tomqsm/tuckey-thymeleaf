@@ -1,20 +1,20 @@
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <meta charset="utf-8"/>
+        <meta charset="UTF-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <title>Index</title>
         <meta name="description" content=""/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
-        <link rel="stylesheet" type="text/css" media="all" href="../css/main.css" th:href="@{/css/main.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/dist/main.css" th:href="@{/css/dist/main.css}" />
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
     </head>
     <body ng-app="tt">
-        <h1>Index well</h1>
+        <h1>Index page coś wąż</h1>
         <p th:with="titleParsed=${'dynamic stuff'}" th:utext="${titleParsed}">static stuff</p>
-        <p th:text="${'init parameter: ' + initParameter}">initParameter</p>
-        <p th:text="${'paramater passed from a method: ' + test}">test</p>
-        <p th:text="#{index.hello('Tomasz')}">i18-off</p>
+        <p th:text="${'init parameter: ' + initParameter}">initParameter: 00</p>
+        <p th:text="${'paramater passed from a method: ' + test}">parameter not passed from backend</p>
+        <p th:text="#{index.hello('Tomasz Kuśmierczyk')}">i18-off</p>
         <p th:text="${#dates.createNow()}">i18-off</p>
         <a th:href="@{/static/info}">view</a>
         <div ng-controller="sum as sum">

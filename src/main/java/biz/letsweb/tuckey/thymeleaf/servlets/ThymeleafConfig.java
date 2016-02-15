@@ -25,6 +25,7 @@ public class ThymeleafConfig {
 //            TEMPLATE_RESOLVER = new FileTemplateResolver();
 //            TEMPLATE_RESOLVER.setPrefix("c:\\Users\\toks\\Documents\\NetBeansProjects\\spa\\front-end\\dist\\html\\");
             TEMPLATE_RESOLVER = new ServletContextTemplateResolver();
+            TEMPLATE_RESOLVER.setCharacterEncoding("UTF-8");
             TEMPLATE_RESOLVER.setPrefix(filterConfig.getInitParameter("setPrefix"));
             TEMPLATE_RESOLVER.setSuffix(filterConfig.getInitParameter("setSuffix"));
             TEMPLATE_RESOLVER.setTemplateMode(filterConfig.getInitParameter("setTemplateMode"));

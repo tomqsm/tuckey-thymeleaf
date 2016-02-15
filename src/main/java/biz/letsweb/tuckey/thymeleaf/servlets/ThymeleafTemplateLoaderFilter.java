@@ -66,6 +66,7 @@ public class ThymeleafTemplateLoaderFilter implements Filter {
             setDefaultView(request);
             addMessageViewMustBeSet(request);
         }
+        response.setCharacterEncoding("UTF-8");
         try (PrintWriter writer = response.getWriter()) {
             final String view = request.getAttribute("view").toString();
             configuredTemplateEngine.process(view, ctx, writer);
