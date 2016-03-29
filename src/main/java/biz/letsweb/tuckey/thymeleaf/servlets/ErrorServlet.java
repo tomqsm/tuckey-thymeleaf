@@ -27,10 +27,13 @@ public class ErrorServlet extends HttpServlet {
         final String errorRequestURI = (String) req.getAttribute(RequestDispatcher.ERROR_REQUEST_URI);
         final Object errorCode = req.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
         final Object errorType = req.getAttribute(RequestDispatcher.ERROR_EXCEPTION_TYPE);
-        final Throwable throwable = (Throwable) req.getAttribute(RequestDispatcher.ERROR_EXCEPTION);
+        Throwable throwable = (Throwable) req.getAttribute(RequestDispatcher.ERROR_EXCEPTION);
         if (throwable != null) {
             final String errorMessage = throwable.getMessage();
             req.setAttribute("errorMessage", errorMessage.isEmpty() ? "no message" : errorMessage);
+        } else {
+            throwable = new Throwable("Not allowed, sorry.");
+            req.setAttribute("errorMessage", throwable.getMessage());
         }
         req.setAttribute("errorRequestURI", errorRequestURI);
         req.setAttribute("errorType", errorType);
