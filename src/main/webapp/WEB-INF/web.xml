@@ -116,7 +116,12 @@
         It also handles error dispatching from the container.
         -->
         <servlet-name>index</servlet-name>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>ThymeleafTemplateLoaderFilter</filter-name>
         <servlet-name>error</servlet-name>
+        <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
@@ -130,13 +135,13 @@
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
     </resource-ref>-->
-    <security-constraint>
+    <!--    <security-constraint>
         <web-resource-collection>
             <web-resource-name>Prevent access to restricted Servlets</web-resource-name>
             <url-pattern>/error-servlet</url-pattern>
         </web-resource-collection>
         <auth-constraint/>
-    </security-constraint>
+    </security-constraint>-->
     <error-page>
         <exception-type>java.lang.Throwable</exception-type>
         <location>/error</location>

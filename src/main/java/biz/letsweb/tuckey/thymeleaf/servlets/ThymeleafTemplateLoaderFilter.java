@@ -116,16 +116,6 @@ public class ThymeleafTemplateLoaderFilter implements Filter {
 
         doAfterProcessing(req, resp);
 
-        // If there was a problem, we want to rethrow it if it is
-        // a known type, otherwise log it.
-        if (problem != null) {
-            if (problem instanceof ServletException) {
-                throw (ServletException) problem;
-            }
-            if (problem instanceof IOException) {
-                throw (IOException) problem;
-            }
-        }
     }
 
     /**

@@ -9,18 +9,19 @@
         <to encode="false">/resources/details.seam?owner=${escape:${unescapePath:$1}}&name=${escape:${unescapePath:$2}}</to>
     </rule>-->
     <rule>
-        <name>Stop direct access to servlets except for the error servlet.</name>
-        <note>Servlets can be only frwarded to from this filter. Then aren't to be access per request.</note>
+        <name>Ban-direct-access-rule</name>
+        <note>Ban direct calls to servlets, forward to a non existent resource to raise web.xml 404.</note>
         <from>^(/index-servlet)$</from>
+        <!--No more "rules" will be processed if this one is a match.-->
         <to last="true">/404</to>
     </rule>
     
     <rule>
         <name>Display error page.</name>
-        <note>Responds to the container's on /error and customises the view of an error for user.</note>
+        <note>Takes up from web.xml error mapping.</note>
         <from>^/error$</from>
         <set name="view">error</set>
-        <to last="true">/error-servlet</to>
+        <to last="true">error-servlet</to>
     </rule>
 
     <rule>
@@ -29,6 +30,7 @@
         <from>^(/|/index)$</from>
         <condition type="method">GET</condition>
         <run class="biz.letsweb.tuckey.thymeleaf.servlets.IndexServlet" method="setTuckeyParams">
+            <!--for demononstration only-->
             <init-param>
                 <param-name>initParameter</param-name>
                 <param-value>10</param-value>

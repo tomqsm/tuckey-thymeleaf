@@ -6,6 +6,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -31,11 +32,13 @@ public class TimedAspect {
     @Around("timedMethods()")
     public Object around(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         final Method method = extractMethod(proceedingJoinPoint);
+        System.out.println("*** Aspect before: " + method.getName());
         final Timed timed = (Timed) method.getDeclaredAnnotations()[0];
         Split split = Split.start();
         final Object proceeded = proceedingJoinPoint.proceed();
         final Signature signature = proceedingJoinPoint.getSignature();
         System.out.println(String.format("%s#%s [%s] %s", signature.getDeclaringType().getSimpleName(), signature.getName(), split, timed.message()));
+        System.out.println("*** Aspect after: " + method.getName());
         return proceeded;
     }
 
@@ -47,6 +50,16 @@ public class TimedAspect {
     @AfterReturning("timedMethods()")
     public void afterTransactionalMethod(JoinPoint joinPoint) {
 //        System.out.println("*after return action*");
+    }
+
+    /**
+     Runs before Around annotation when exception thrown.
+     @param joinPoint
+     @param e
+     */
+    @AfterThrowing(pointcut = "timedMethods()", throwing = "e")
+    public void afterExcpetion(JoinPoint joinPoint, Exception e) {
+        System.out.println("Threw excpetion " + e);
     }
 
     private Method extractMethod(final JoinPoint joinPoint) {
